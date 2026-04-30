@@ -1,0 +1,7 @@
+Trong Spring Data JPA, khi viết câu lệnh UPDATE bằng JPQL, mặc định nó không được thực thi nếu
+thiếu annotation ràng buộc. Vì @Query chỉ định nghĩa câu lệnh JPQL nhưng để thực hiện thao tác UPDATE
+thì Spring Data JPA yêu cầu phải có annotation @Modifying. Nếu không có framework sẽ coi câu lệnh như
+một câu truy vấn SELECT -> lệnh UPDATE không bao giờ được gửi xuống DB, nhưng cũng không báo lỗi vì
+cú pháp hợp lệ.
+-> Hệ thống báo “Hủy thành công” nhưng dữ liệu trong DB không thay đổi,
+dẫn đến đơn hàng vẫn ở trạng thái PROCESSING.

@@ -1,0 +1,20 @@
+package com.example.ss15hw02.p2.repository;
+
+import com.example.ss15hw02.p2.model.Order;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.transaction.annotation.Transactional;
+
+@Repository
+public interface OrderRepository extends JpaRepository<Order, Long> {
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE Order o SET o.status = 'CANCELLED' WHERE o.id = :orderId")
+    void cancelFraudulentOrder(@Param("orderId") Long orderId);
+}
+
+
